@@ -5,6 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [draw, setDraw] = useState(false);
   const checkWinner = (squares) => {
     const winningCombinations = [
       [0, 1, 2],
@@ -28,8 +29,6 @@ const App = () => {
     }
     return null;
   };
-  const containsNull = (containsNull) => containsNull !== null;
-  const draw = board.every(containsNull);
   const winner = checkWinner(board);
   const play = (index) => {
     if (board[index] === null) {
@@ -37,9 +36,9 @@ const App = () => {
       previousBoard[index] = xIsNext ? 'x' : 'o';
       setXIsNext(!xIsNext);
       setBoard(previousBoard);
-      console.log(draw);
-    } else {
-      return;
+    }
+    if (board.every((square) => square !== null)) {
+      setDraw(true);
     }
   };
   const reset = () => {
@@ -61,12 +60,20 @@ const App = () => {
           );
         })}
       </div>
-      <button className="reset" onClick={reset}>
+      <button className='reset' onClick={reset}>
         Reset
       </button>
       {winner === true && (
         <div className='messageContainer'>
           <div className='message'>{xIsNext ? 'O' : 'X'} wins</div>
+          <div className='close' onClick={reset}>
+            <AiOutlineClose />
+          </div>
+        </div>
+      )}
+      {draw === true && (
+        <div className='messageContainer'>
+          <div className='message'>Draw</div>
           <div className='close' onClick={reset}>
             <AiOutlineClose />
           </div>
