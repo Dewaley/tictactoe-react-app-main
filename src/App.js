@@ -71,7 +71,7 @@ const App = () => {
           </div>
         </div>
       )}
-      {draw === true && winner === false && (
+      {draw === true && winner !== true && (
         <div className='messageContainer'>
           <div className='message'>Draw</div>
           <div className='close' onClick={reset}>
