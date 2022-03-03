@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from 'react-icons/ai';
 
 const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -23,26 +23,29 @@ const App = () => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return true
+        return true;
       }
     }
-    return null
+    return null;
   };
-  const winner = checkWinner(board)
+  const containsNull = (containsNull) => containsNull !== null;
+  const draw = board.every(containsNull);
+  const winner = checkWinner(board);
   const play = (index) => {
     if (board[index] === null) {
       const previousBoard = [...board];
       previousBoard[index] = xIsNext ? 'x' : 'o';
       setXIsNext(!xIsNext);
       setBoard(previousBoard);
-      console.log(winner)
+      console.log(draw);
     } else {
       return;
     }
   };
   const reset = () => {
-    
-  }
+    setBoard(Array(9).fill(null));
+    setXIsNext(true);
+  };
   return (
     <div className='App'>
       <div className={`board ${xIsNext ? 'x' : 'o'}`}>
@@ -58,17 +61,17 @@ const App = () => {
           );
         })}
       </div>
-      {/* {
-        winner === true && <div className="message">Winner</div>
-      } */}
-      <div className='messageContainer'>
-        <div className="message">
-          Message
+      <button className="reset" onClick={reset}>
+        Reset
+      </button>
+      {winner === true && (
+        <div className='messageContainer'>
+          <div className='message'>{xIsNext ? 'O' : 'X'} wins</div>
+          <div className='close' onClick={reset}>
+            <AiOutlineClose />
+          </div>
         </div>
-        <div className="close" onClick={reset}>
-          <AiOutlineClose/>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

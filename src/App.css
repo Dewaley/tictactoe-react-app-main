@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;700&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Josefin Sans';
 }
 :root {
   --cell-size: 100px;
@@ -17,6 +19,7 @@
   align-items: center;
   background-color: #008bf1;
   position: relative;
+  overflow: hidden;
 }
 .board {
   display: grid;
@@ -122,10 +125,22 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  height: 100vh;
-  width: 100vw;
+  height: 120vh;
+  width: 120vw;
   background-color: black;
   opacity: 0.8;
+  font-size: 20px;
+}
+.reset {
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 20px;
+  color: white;
+  background-color: #5252ab;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .close {
   position: absolute;
