@@ -36,9 +36,9 @@ const App = () => {
       previousBoard[index] = xIsNext ? 'x' : 'o';
       setXIsNext(!xIsNext);
       setBoard(previousBoard);
-    }
-    if (board.every((square) => square !== null)) {
-      setDraw(true);
+      if (previousBoard.every((square) => square !== null)) {
+        setDraw(true);
+      }
     }
   };
   const reset = () => {
@@ -71,7 +71,7 @@ const App = () => {
           </div>
         </div>
       )}
-      {draw === true && (
+      {draw === true && winner === false && (
         <div className='messageContainer'>
           <div className='message'>Draw</div>
           <div className='close' onClick={reset}>
