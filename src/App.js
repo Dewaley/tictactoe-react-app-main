@@ -44,6 +44,7 @@ const App = () => {
   const reset = () => {
     setBoard(Array(9).fill(null));
     setXIsNext(true);
+    setDraw(false)
   };
   return (
     <div className='App'>
